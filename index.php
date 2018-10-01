@@ -1,3 +1,22 @@
+<?php 
+  $name = 'Alex Guerrero';
+  $limitMonts = 100;
+  
+  include('jobs.php');
+
+  // var_dump($jobs);
+  // $var1 =4;
+  // if($var1 > 2){
+  //   echo "Es mayor que 2";
+  // }else{
+  //   echo "No es mayor que 2";
+  // }
+
+  
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -21,7 +40,7 @@
         <img id="profile-picture" src="https://ui-avatars.com/api/?name=John+Doe&size=255" alt="">
       </div>
       <div class="col">
-        <h1>Hector Benitez</h1>
+        <h1><?php echo $name; ?></h1>
         <h2>PHP Developer</h2>
         <ul>
           <li>Mail: hector@mail.com</li>
@@ -44,37 +63,48 @@
       <div class="col">
         <div>
           <h3 class="border-bottom-gray" >Work Experience</h3>
+          
           <ul>
-            <li class="work-position">
-              <h5>PHP Developer</h5>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
-              <strong>Achievements:</strong>
-              <ul>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-              </ul>
-            </li>
-            <li class="work-position">
-                <h5>PHP Developer</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
-                <strong>Achievements:</strong>
-                <ul>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                </ul>
-              </li>
-              <li class="work-position">
-                  <h5>PHP Developer</h5>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente sed pariatur sint exercitationem eos expedita eveniet veniam ullam, quia neque facilis dicta voluptatibus. Eveniet doloremque ipsum itaque obcaecati nihil.</p>
-                  <strong>Achievements:</strong>
-                  <ul>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-                  </ul>
-                </li>
+            <?php 
+              // $cont = 0;
+              // do{
+              //   echo '
+              //     <li class="work-position">
+              //       <h5>'.$jobs[$cont]['title'].'</h5>
+              //       <p>'.$jobs[$cont]['description'].'</p>
+              //       <strong>Achievements:</strong>
+              //       <ul>
+              //         <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+              //         <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+              //         <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+              //       </ul>
+              //     </li>
+              //   ';
+              //   $cont = $cont + 1;
+              // }while($cont < 3);
+            ?>
+
+            <?php
+              $totalMonts = 0;
+
+
+              for ($cont=0; $cont < count($jobs) ; $cont++) {
+
+                $totalMonts += $jobs[$cont]->monts;
+
+                // if($jobs[$cont]['visible'] == true){ 
+                //   printJobs($jobs[$cont]);                 
+                // }
+                if ($totalMonts > $limitMonts) {
+                  break;
+                }
+
+                printJobs($jobs[$cont]);
+
+              }
+            ?>
+
+
           </ul>
         </div>
         <div>
