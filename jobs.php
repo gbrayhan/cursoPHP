@@ -1,4 +1,8 @@
 <?php
+
+  require 'app/Models/Job.php';
+  require 'app/Models/Project.php';
+  
  // $jobs = [
  //    [
  //      'title' => 'PHP Developer',
@@ -31,69 +35,28 @@
 /**
  * 
  */
-  class Job {
-    // function __construct(argument) {
-    // }
-    private $title;
-    public $description;
-    public $visible;
-    public $monts;
 
-
-    public function setTitle($title) {
-      $this->title = $title;
-    }
-    public function getTitle() {
-      return $this->title;
-    }
-
-
-
-  }
-  $job1 = new Job();
-
-  $job1->setTitle('PHP Developer');
-  $job1->description = 'This is an awesome job';
+  $job1 = new Job('PHP Developer','This is an awesome job');
   $job1->visible = true;
   $job1->monts = 16;
 
-  $job2 = new Job();
-
-  $job2->setTitle('Python Developer');
-  $job2->description = 'This is an awesome job for Python';
+  $job2 = new Job('Python Developer','This is an awesome job for Python');
   $job2->visible = true;
   $job2->monts = 23;
 
+  $project1= new Project('Laravel Developer','This is an awesome job for Laravel');
 
   $jobs = [
     $job1,
-    $job2
+    $job2,
   ];
 
+$projects = [
+  $project1
+];
 
-  function getDuration($monts) {
 
-    $years= floor($monts / 12);
-    $extraMonts = $monts % 12;
-
-    if (($years == 0) && ($monts == 1)) {
-      return "$monts mes"; 
-    } else if (($years == 0) && ($monts > 1)) {
-      return "$monts meses"; 
-    } else if (($years == 1) && ($extraMonts == 0)) {
-      return "$years año";
-    } else if (($years == 1) && ($extraMonts == 1)) {
-      return "$years año $extraMonts mes";
-    } else if (($years == 1) && ($extraMonts > 1)) {
-      return "$years año $extraMonts meses";
-    } else if (($years > 1) && ($extraMonts == 0)) {
-      return "$years años";
-    } else if (($years > 1) && ($extraMonts == 1)) {
-      return "$years años $extraMonts mes";
-    } else if (($years > 1) && ($extraMonts > 1)) {
-      return "$years años $extraMonts meses";
-    }
-  }
+  
 
   // function printJobs($jobs) {
 
@@ -115,7 +78,7 @@
   //   '; 
   // }
   
-  function printJobs($job) {
+  function printElement($job) {
 
     if ($job->visible == false) {
       return;
@@ -124,7 +87,7 @@
       <li class="work-position">
         <h5>'.$job->getTitle().'</h5>
         <p>'.$job->description.'</p>
-        <p>'.getDuration($job->monts).'</p>
+        <p>'.$job->getDurationAsString().'</p>
         <strong>Achievements:</strong>
         <ul>
           <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>

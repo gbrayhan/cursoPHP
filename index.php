@@ -99,7 +99,7 @@
                   break;
                 }
 
-                printJobs($jobs[$cont]);
+                printElement($jobs[$cont]);
 
               }
             ?>
@@ -109,6 +109,13 @@
         </div>
         <div>
             <h3 class="border-bottom-gray">Projects</h3>
+            <ul>
+              <?php
+                for ($cont=0; $cont < count($projects) ; $cont++) {
+                  printElement($projects[$cont]);
+                }
+              ?>
+            </ul>
             <div class="project">
                 <h5>Project X</h5>
                 <div class="row">
