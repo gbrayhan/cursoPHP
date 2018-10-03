@@ -1,8 +1,20 @@
 <?php
-
-  require 'app/Models/Job.php';
-  require 'app/Models/Project.php';
   
+
+  require_once 'vendor/autoload.php'; //Utilizando Composer nos ayuda a dejar de usar los require ya que hace un mapeo de objetos con los namespaces de los archivos
+
+  // require_once 'app/Models/Job.php';
+  // require_once 'app/Models/Project.php';
+  // require_once 'app/Models/Printable.php';
+  
+  // require 'lib1/Project.php';
+
+  // use App\Models\Job;
+  // use App\Models\Project;
+  // use App\Models\Printable;
+  use App\Models\{Job, Project, Printable};
+
+
  // $jobs = [
  //    [
  //      'title' => 'PHP Developer',
@@ -32,9 +44,7 @@
  //    ]   
  //  ];
 
-/**
- * 
- */
+
 
   $job1 = new Job('PHP Developer','This is an awesome job');
   $job1->visible = true;
@@ -78,7 +88,7 @@ $projects = [
   //   '; 
   // }
   
-  function printElement($job) {
+  function printElement(Printable $job) {
 
     if ($job->visible == false) {
       return;
@@ -86,7 +96,7 @@ $projects = [
     echo '
       <li class="work-position">
         <h5>'.$job->getTitle().'</h5>
-        <p>'.$job->description.'</p>
+        <p>'.$job->getDescription().'</p>
         <p>'.$job->getDurationAsString().'</p>
         <strong>Achievements:</strong>
         <ul>

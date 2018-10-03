@@ -1,5 +1,10 @@
 <?php 
-class BaseElement {
+
+namespace App\Models;
+
+// require_once 'Printable.php';
+
+class BaseElement implements Printable {
     // function __construct(argument) {
     // }
     // private $title;
@@ -22,7 +27,7 @@ class BaseElement {
       return $this->title;
     }
 
-    function getDurationAsString() {
+    public function getDurationAsString() {
 
 	    $years= floor($this->monts / 12);
 	    $extraMonts = $this->monts % 12;
@@ -45,6 +50,10 @@ class BaseElement {
 	      return "$years años $extraMonts meses";
 	    }
   	}
+
+  	public function getDescription(){
+		return $this->description;
+	}	
 
 }
 

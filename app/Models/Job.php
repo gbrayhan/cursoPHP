@@ -1,5 +1,11 @@
 <?php
-	require_once 'BaseElement.php';
+	
+	namespace App\Models;
+	
+	// require_once 'BaseElement.php';
+
+
+	
 
 	class Job extends BaseElement {
 		public function __construct($title, $description) {
@@ -8,7 +14,7 @@
 		}
 
 
-		function getDurationAsString() {
+		public function getDurationAsString() {
 
 		    $years= floor($this->monts / 12);
 		    $extraMonts = $this->monts % 12;
