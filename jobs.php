@@ -1,8 +1,7 @@
 <?php
   
 
-  require_once 'vendor/autoload.php'; //Utilizando Composer nos ayuda a dejar de usar los require ya que hace un mapeo de objetos con los namespaces de los archivos
-
+  require_once 'vendor/autoload.php'; 
   // require_once 'app/Models/Job.php';
   // require_once 'app/Models/Project.php';
   // require_once 'app/Models/Printable.php';
