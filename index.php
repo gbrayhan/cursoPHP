@@ -2,20 +2,34 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+  
+  require_once 'vendor/autoload.php'; 
 
   $name = 'Alex Guerrero';
   $limitMonts = 100;
   
+  use Illuminate\Database\Capsule\Manager as Capsule;
+  use App\Models\Job;
+
+  $capsule = new Capsule;
+  $capsule->addConnection([
+      'driver'    => 'mysql',
+      'host'      => 'localhost',
+      'database'  => 'cursophp',
+      'username'  => 'root',
+      'password'  => '',
+      'charset'   => 'utf8',
+      'collation' => 'utf8_unicode_ci',
+      'prefix'    => '',
+  ]);
+
+  // Make this Capsule instance available globally via static methods... (optional)
+  $capsule->setAsGlobal();
+
+  // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
+  $capsule->bootEloquent();
+
   include('jobs.php');
-
-  // var_dump($jobs);
-  // $var1 =4;
-  // if($var1 > 2){
-  //   echo "Es mayor que 2";
-  // }else{
-  //   echo "No es mayor que 2";
-  // }
-
   
 
 
@@ -69,24 +83,7 @@ error_reporting(E_ALL);
           <h3 class="border-bottom-gray" >Work Experience</h3>
           
           <ul>
-            <?php 
-              // $cont = 0;
-              // do{
-              //   echo '
-              //     <li class="work-position">
-              //       <h5>'.$jobs[$cont]['title'].'</h5>
-              //       <p>'.$jobs[$cont]['description'].'</p>
-              //       <strong>Achievements:</strong>
-              //       <ul>
-              //         <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-              //         <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-              //         <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
-              //       </ul>
-              //     </li>
-              //   ';
-              //   $cont = $cont + 1;
-              // }while($cont < 3);
-            ?>
+            
 
             <?php
               $totalMonts = 0;
@@ -96,9 +93,7 @@ error_reporting(E_ALL);
 
                 $totalMonts += $jobs[$cont]->monts;
 
-                // if($jobs[$cont]['visible'] == true){ 
-                //   printJobs($jobs[$cont]);                 
-                // }
+              
                 if ($totalMonts > $limitMonts) {
                   break;
                 }
