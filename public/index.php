@@ -39,7 +39,10 @@
 	$routerContainer = new RouterContainer();
 
 	$map = $routerContainer->getMap(); 
-	$map->get('index','/','../index.php');
+	$map->get('index','/', [
+		'controller' => 'App\Controllers\IndexController',
+		'action' => 'indexAction'
+	]);
 	$map->get('addJob','/job/add','../addJob.php');
 
 	$matcher = $routerContainer->getMatcher();
@@ -49,10 +52,20 @@
 	if (!$route) {
 		echo "No route";
 	} else {
-		require $route->handler;
-	}
-	// var_dump($route);
+		$handlerData = $route->handler;
 
+		var_dump($handlerData);
+
+		$controllerName = $handlerData['controller'];
+		$actionName = $handlerData['action'];
+
+		$controller = new $controllerName;
+
+		$controller->$actionName();
+
+		
+	}
+	
 	
 	
 
