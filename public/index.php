@@ -43,30 +43,41 @@
 		'controller' => 'App\Controllers\IndexController',
 		'action' => 'indexAction'
 	]);
-	$map->get('addJob','/job/add','../addJob.php');
+	$map->get('addJob','/job/add',[
+		'controller' => 'App\Controllers\JobController',
+		'action' => 'getAddJobAction'
+	]);
 
 	$matcher = $routerContainer->getMatcher();
-
 	$route = $matcher->match($request);
+
+	function printElement($elemento) {
+		echo '
+			<li class="work-position">
+			<h5>'.$elemento->title.'</h5>
+			<p>'.$elemento->description.'</p>
+			<p>'.$elemento->getDurationAsString().'</p>
+			<strong>Achievements:</strong>
+			<ul>
+			  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+			  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+			  <li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>
+			</ul>
+			</li>
+		'; 
+	}
 
 	if (!$route) {
 		echo "No route";
 	} else {
 		$handlerData = $route->handler;
-
-		var_dump($handlerData);
-
+		// var_dump($handlerData);
 		$controllerName = $handlerData['controller'];
 		$actionName = $handlerData['action'];
-
-		$controller = new $controllerName;
-
-		$controller->$actionName();
-
 		
+		$controller = new $controllerName;
+		$controller->$actionName();
 	}
-	
-	
-	
+		
 
 ?>

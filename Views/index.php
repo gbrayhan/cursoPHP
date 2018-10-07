@@ -1,11 +1,3 @@
-<?php 
-  $name = 'Alex Guerrero';
-  $limitMonts = 100;
-  
-  include('jobs.php');
-
-?>
-
 <!doctype html>
 <html lang="en">
 
