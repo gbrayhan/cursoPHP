@@ -6,7 +6,9 @@
 		}
 	},
 	"require": {
-		"illuminate/database": "5.7"
+		"illuminate/database": "5.7",
+		"zendframework/zend-diactoros": "2.0.0",
+		"aura/router": "3.1.0"
 	}
 	
 }
