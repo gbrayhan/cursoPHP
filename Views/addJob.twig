@@ -1,0 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+	<form action="/job/add" method="POST" enctype="multipart/form-data">
+		<h3>Add Job</h3>
+		<label>Title:</label>
+		<input type="text" name="title"><br/>
+		<label>Description:</label>
+		<input type="text" name="description"><br/>
+		<input type="file" name="logo"><br>
+		<button type="submit">Save</button>
+
+	</form>
+
+{% endblock %}

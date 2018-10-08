@@ -1,0 +1,10 @@
+
+
+Name								Require Version PHP
+-----------------------------------+--------------------
+									
+illuminate/database					php: ^7.1.3
+zendframework/zend-diactoros		php: ^7.1
+aura/router							php: >=5.5.0
+twig/twig"							php: ^7.0
+respect/validation					php: >=5.4

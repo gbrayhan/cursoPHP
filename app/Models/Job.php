@@ -1,43 +1,34 @@
 <?php
 	
 	namespace App\Models;
-	
-	// require_once 'BaseElement.php';
+	use Illuminate\Database\Eloquent\Model;
 
-
-	
-
-	class Job extends BaseElement {
-		public function __construct($title, $description) {
-			$newTitle = "Job: $title";
-			parent::__construct($newTitle,$description);
-		}
-
+	class Job extends Model {
+		protected $table = 'jobs';
 
 		public function getDurationAsString() {
 
-		    $years= floor($this->monts / 12);
-		    $extraMonts = $this->monts % 12;
+		    $years= floor($this->months / 12);
+		    $extraMonts = $this->months % 12;
 
-		    if (($years == 0) && ($this->monts == 1)) {
-		      return "Job Duration: $this->monts mont"; 
-		    } else if (($years == 0) && ($this->monts > 1)) {
-		      return "Job Duration: $this->monts monts"; 
+		    if (($years == 0) && ($this->months == 1)) {
+		      return "Job Duration: $this->months month"; 
+		    } else if (($years == 0) && ($this->months > 1)) {
+		      return "Job Duration: $this->months months"; 
 		    } else if (($years == 1) && ($extraMonts == 0)) {
 		      return "Job Duration: $years year";
 		    } else if (($years == 1) && ($extraMonts == 1)) {
-		      return "Job Duration: $years year $extraMonts mont";
+		      return "Job Duration: $years year $extraMonts month";
 		    } else if (($years == 1) && ($extraMonts > 1)) {
-		      return "Job Duration: $years year $extraMonts monts";
+		      return "Job Duration: $years year $extraMonts months";
 		    } else if (($years > 1) && ($extraMonts == 0)) {
 		      return "Job Duration: $years years";
 		    } else if (($years > 1) && ($extraMonts == 1)) {
-		      return "Job Duration: $years years $extraMonts mont";
+		      return "Job Duration: $years years $extraMonts month";
 		    } else if (($years > 1) && ($extraMonts > 1)) {
-		      return "Job Duration: $years years $extraMonts monts";
+		      return "Job Duration: $years years $extraMonts months";
 		    }
-  		}
-		
+  		}	
 	}
 
 ?>
