@@ -4,7 +4,7 @@
 
 
 
-	class JobController {
+	class JobController extends BaseController {
 		public function getAddJobAction($request){
 			// echo "Funcion Get Add Job Action";
 			var_dump($request->getBody());
@@ -19,7 +19,7 @@
 				$job->description = $postData['description'];
 				$job->save();	
 			}
-			include '../Views/addJob.php';
+			echo $this->renderHTML('addJob.twig');
 		}
 	} 
 
