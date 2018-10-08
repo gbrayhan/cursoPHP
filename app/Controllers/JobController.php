@@ -1,15 +1,22 @@
 <?php
 	namespace App\Controllers;
+	use App\Models\Job;
+
+
 
 	class JobController {
-		public function getAddJobAction(){
+		public function getAddJobAction($request){
 			// echo "Funcion Get Add Job Action";
+			var_dump($request->getBody());
+			var_dump($request->getParsedBody());
 
-			if (!empty($_POST)) {
+			if ($request->getMethod() == 'POST') {
+
+				$postData = $request->getParsedBody();
+
 				$job = new Job();
-
-				$job->title = $_POST['title'];
-				$job->description = $_POST['description'];
+				$job->title = $postData['title'];
+				$job->description = $postData['description'];
 				$job->save();	
 			}
 			include '../Views/addJob.php';
