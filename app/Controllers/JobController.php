@@ -7,8 +7,8 @@
 	class JobController extends BaseController {
 		public function getAddJobAction($request){
 			// echo "Funcion Get Add Job Action";
-			var_dump($request->getBody());
-			var_dump($request->getParsedBody());
+			// var_dump($request->getBody());
+			// var_dump($request->getParsedBody());
 
 			if ($request->getMethod() == 'POST') {
 
@@ -19,7 +19,8 @@
 				$job->description = $postData['description'];
 				$job->save();	
 			}
-			echo $this->renderHTML('addJob.twig');
+
+			return  $this->renderHTML('addJob.twig', []);
 		}
 	} 
 
