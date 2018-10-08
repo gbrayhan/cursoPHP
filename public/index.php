@@ -80,7 +80,10 @@
 		$actionName = $handlerData['action'];
 		
 		$controller = new $controllerName;
-		$controller->$actionName($request);
+		$response = $controller->$actionName($request);//Peticion $Response
+
+		//Enviamos la respuesta al Cliente PSR7
+		echo $response->getBody();
 	}
 		
 
