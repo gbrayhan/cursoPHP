@@ -96,18 +96,19 @@
 	} else {
 		$handlerData = $route->handler;
 		// var_dump($handlerData);
-		$controllerName = $handlerData['controller'];
-		$actionName = $handlerData['action'];
 
 		$needsAuth = $handlerData['auth'] ?? false; // si no esta definido asgna FALSE
 		$sessionUserId = $_SESSION['userId'] ?? null; // si no esta definido asgna NULL
 
 		if ($needsAuth && !$sessionUserId) {
-			echo "Ruta Protegida";
-			die;
+			// echo "Ruta Protegida";
+			$controllerName = 'App\Controllers\AuthController';
+			$actionName = 'getLogin' ;
+			
+		} else{
+			$controllerName = $handlerData['controller'];
+			$actionName = $handlerData['action'];
 		}
-	
-
 		
 		$controller = new $controllerName;
 		$response = $controller->$actionName($request);//Peticion $Response

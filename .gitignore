@@ -1,10 +1,8 @@
 composer.phar
 composer.lock
 
-<<<<<<< HEAD
+
 /vendor/
 /.idea/
-=======
-# Carpetas
-/vendor/
->>>>>>> 8ae6b39deeb36af02b97e2e659b73e932231ead7
+
+
