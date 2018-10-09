@@ -6,6 +6,8 @@
 
 	require_once '../vendor/autoload.php';
 
+	session_start();
+
 	use Aura\Router\RouterContainer;
 	use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -45,20 +47,45 @@
 	]);
 	$map->get('addJob','/job/add',[
 		'controller' => 'App\Controllers\JobController',
-		'action' => 'getAddJobAction'
+		'action' => 'getAddJobAction',
+		'auth' => true
 	]);
 	$map->post('saveJob','/job/add',[
 		'controller' => 'App\Controllers\JobController',
-		'action' => 'postAddJobAction'
+		'action' => 'postAddJobAction',
+		'auth' => true
 	]);
 	$map->get('addUser','/user/add',[
 		'controller' => 'App\Controllers\UserController',
-		'action' => 'getAddUserAction'
+		'action' => 'getAddUserAction',
+		'auth' => true
+
 	]);
 	$map->post('saveUser','/user/add',[
 		'controller' => 'App\Controllers\UserController',
-		'action' => 'postAddUserAction'
+		'action' => 'postAddUserAction',
+		'auth' => true
 	]);
+
+	$map->get('loginForm','/login',[
+		'controller' => 'App\Controllers\AuthController',
+		'action' => 'getLogin'
+	]);
+	$map->post('auth','/auth',[
+		'controller' => 'App\Controllers\AuthController',
+		'action' => 'postLogin'
+	]);
+	$map->get('logout','/logout',[
+		'controller' => 'App\Controllers\AuthController',
+		'action' => 'getLogout'
+	]);
+
+	$map->get('admin','/admin',[
+		'controller' => 'App\Controllers\AdminController',
+		'action' => 'getIndex',
+		'auth' => true
+	]);
+	
 
 	$matcher = $routerContainer->getMatcher();
 	$route = $matcher->match($request);
@@ -71,9 +98,26 @@
 		// var_dump($handlerData);
 		$controllerName = $handlerData['controller'];
 		$actionName = $handlerData['action'];
+
+		$needsAuth = $handlerData['auth'] ?? false; // si no esta definido asgna FALSE
+		$sessionUserId = $_SESSION['userId'] ?? null; // si no esta definido asgna NULL
+
+		if ($needsAuth && !$sessionUserId) {
+			echo "Ruta Protegida";
+			die;
+		}
+	
+
 		
 		$controller = new $controllerName;
 		$response = $controller->$actionName($request);//Peticion $Response
+
+		foreach ($response->getHeaders() as $name => $values) {
+			foreach ($values as $value) {
+				header(sprintf('%s: %s', $name, $value), false);
+			}
+		}
+		http_response_code($response->getStatusCode());
 
 		//Enviamos la respuesta al Cliente PSR7
 		echo $response->getBody();
