@@ -6,7 +6,7 @@
 
 
 	class JobController extends BaseController {
-		public function getAddJobAction($request){
+		public function postAddJobAction($request){
 			$responseMessage = null;
 			
 			if ($request->getMethod() == 'POST') {
@@ -38,6 +38,13 @@
 	                $responseMessage = $e->getMessage();
 	            }
 			}
+
+			return $this->renderHTML('addJob.twig', [
+            	'responseMessage' => $responseMessage
+        	]);
+		}
+		public function getAddJobAction($request){
+			$responseMessage = null;
 
 			return $this->renderHTML('addJob.twig', [
             	'responseMessage' => $responseMessage

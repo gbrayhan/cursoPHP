@@ -49,7 +49,15 @@
 	]);
 	$map->post('saveJob','/job/add',[
 		'controller' => 'App\Controllers\JobController',
-		'action' => 'getAddJobAction'
+		'action' => 'postAddJobAction'
+	]);
+	$map->get('addUser','/user/add',[
+		'controller' => 'App\Controllers\UserController',
+		'action' => 'getAddUserAction'
+	]);
+	$map->post('saveUser','/user/add',[
+		'controller' => 'App\Controllers\UserController',
+		'action' => 'postAddUserAction'
 	]);
 
 	$matcher = $routerContainer->getMatcher();
