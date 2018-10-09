@@ -11,13 +11,18 @@
 	use Aura\Router\RouterContainer;
 	use Illuminate\Database\Capsule\Manager as Capsule;
 
+	//Usamos encapsulacion de datos privador
+	$dotenv = new Dotenv\Dotenv(__DIR__.'/..');//Concatenacion
+	$dotenv->load();
+
+	
 	$capsule = new Capsule;
 	$capsule->addConnection([
 		'driver'    => 'mysql',
-		'host'      => 'localhost',
-		'database'  => 'cursophp',
-		'username'  => 'root',
-		'password'  => '',
+		'host'      => getenv('DB_HOST'),
+		'database'  => getenv('DB_NAME'),
+		'username'  => getenv('DB_USER'),
+		'password'  => getenv('DB_PASSWORD'),
 		'charset'   => 'utf8',
 		'collation' => 'utf8_unicode_ci',
 		'prefix'    => '',
