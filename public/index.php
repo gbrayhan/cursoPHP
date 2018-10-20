@@ -90,6 +90,11 @@
 		'action' => 'getIndex',
 		'auth' => true
 	]);
+	$map->get('userData','/user/{id}',[
+		'controller' => 'App\Controllers\AdminController',
+		'action' => 'getUserData',
+		'auth' => true
+	]);
 	
 
 	$matcher = $routerContainer->getMatcher();
@@ -108,15 +113,20 @@
 		if ($needsAuth && !$sessionUserId) {
 			// echo "Ruta Protegida";
 			$controllerName = 'App\Controllers\AuthController';
-			$actionName = 'getLogin' ;
+			$actionName = 'getLogout' ;
 			
 		} else{
 			$controllerName = $handlerData['controller'];
 			$actionName = $handlerData['action'];
 		}
-		
+		 
+		// Obtiene los atributos que se envian en la ruta ej. /ruta/{param}
+		foreach ($route->attributes as $key => $val) {
+   			$request = $request->withAttribute($key, $val);
+		}	
+
 		$controller = new $controllerName;
-		$response = $controller->$actionName($request);//Peticion $Response
+		$response = $controller->$actionName($request);// Peticion $Response
 
 		foreach ($response->getHeaders() as $name => $values) {
 			foreach ($values as $value) {

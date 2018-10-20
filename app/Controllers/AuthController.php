@@ -26,13 +26,23 @@ namespace App\Controllers;
        			if (\password_verify($postData['password'], $user->password)) {
        				// echo "Todo Correcto";
        				$_SESSION['userId'] = $user->id;
+
+              // var_dump($user);
+              // die();
+              
        				return new RedirectResponse('/admin');
+              // return $this->renderHTML('admin.twig', [
+              //   'user' => $user,
+              //   'responseMessage' => $responseMessage
+              // ]); 
+               
      
        			} else{
        				$responseMessage = "Password Invaido";
-            			return $this->renderHTML('login.twig', [
-        					'responseMessage' => $responseMessage
-       					]);
+            	
+              return $this->renderHTML('login.twig', [
+        				'responseMessage' => $responseMessage
+       				]);
        			}
             } else{
             	$responseMessage = "Usuario no encontrado";
