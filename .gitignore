@@ -1,8 +1,10 @@
 composer.phar
 composer.lock
+.env
+package-lock.json
 
-
-/vendor/
-/.idea/
+# Carpetas a Ignorar
+vendor/*
+.idea/*
 
 
